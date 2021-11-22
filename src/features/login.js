@@ -16,14 +16,13 @@ export function submitForm(userLogin, remember) {
             return;
         }
         dispatch(actions.fetching(userLogin))
-        apiProvider.login(userLogin)
+        await apiProvider.login(userLogin)
             .then(response => {
-                dispatch(actions.resolved(response.data.body.token))
-                return response.data.body.token
+                dispatch(actions.resolved(response.data))
             })
             .catch(error => {
                 dispatch(actions.rejected(error))
-                return error
+                throw error
             })
     }
 }
@@ -39,7 +38,6 @@ const {actions, reducer} = createSlice({
             reducer: (draft, action) => {
                 if (draft.status === 'void') {
                     draft.status = 'pending'
-                    draft.data = action.payload.data
                     return
                 }
                 if (draft.status === 'rejected') {
@@ -51,8 +49,7 @@ const {actions, reducer} = createSlice({
                     draft.status = 'updating'
                     return
                 }
-                draft.status = 'updating'
-                draft.data = action.payload.data
+                return
             },
         },
         resolved: {
@@ -60,13 +57,9 @@ const {actions, reducer} = createSlice({
                 payload: { data },
             }),
             reducer: (draft, action) => {
-                if (draft.data !== action.payload.data) {
-                    draft.data.token = action.payload.data
-                    draft.isConnected = true
-                    return
-                }
                 if (draft.status === 'pending' || draft.status === 'updating') {
-                    draft.data.token = action.payload.data
+                    draft.data = action.payload.data.body
+                    draft.isConnected = true
                     draft.status = 'resolved'
                     return
                 }
