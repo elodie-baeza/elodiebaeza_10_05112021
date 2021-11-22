@@ -5,7 +5,7 @@ import { selectLogin } from "utils/selectors"
 const initialState = {
     status: 'void',
     isConnected: false,
-    data: null,
+    data: {token: null},
     error: null,
 }
 
@@ -71,10 +71,6 @@ const {actions, reducer} = createSlice({
                 payload: { error },
             }),
             reducer: (draft, action) => {
-                if (draft.error !== action.payload.error){
-                    draft.error = action.payload.error.message
-                    return
-                }
                 if (draft.status === 'pending' || draft.status === 'updating') {
                     draft.error = action.payload.error.message
                     draft.data = null
