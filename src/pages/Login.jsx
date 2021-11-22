@@ -29,6 +29,7 @@ export default function Login(){
             <Form 
               onSubmit={onSubmit}
               initialValues={formData}
+              // validate function : valid the fields before sending
               validate={(values) => {
                 const errors = {};
                 if (!values.email) {
@@ -54,7 +55,7 @@ export default function Login(){
                         <label htmlFor="password">Password</label>
                         <Field 
                         name='password' 
-                        type="text" 
+                        type="password" 
                         id="password" 
                         component='input'
                         />
