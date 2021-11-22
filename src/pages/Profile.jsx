@@ -2,12 +2,14 @@ import { fetchOrUpdateProfile } from "features/profile";
 import React, { useEffect } from "react"
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { selectLogin } from "utils/selectors";
+import { selectLogin, selectProfile } from "utils/selectors";
 
 export default function Profile() {
     const dispatch = useDispatch()
 
     const token = useSelector(selectLogin).data.token
+
+    const user = useSelector(selectProfile).data
     
     useEffect(() => {
         dispatch(fetchOrUpdateProfile(token))
@@ -20,7 +22,7 @@ export default function Profile() {
         <React.Fragment>
             <main className="main bg-dark">
                 <div className="header">
-                    <h1>Welcome back<br />Tony Jarvis!</h1>
+                    <h1>Welcome back<br />{user.firstName} {user.lastName}!</h1>
                     <button className="edit-button">Edit Name</button>
                 </div>
                 <h2 className="sr-only">Accounts</h2>
