@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 import apiProvider from "data/apiProvider";
-import { selectProfile } from "utils/selectors"
+import { selectLogin, selectProfile } from "utils/selectors"
 
 const initialState = {
     status: 'void',
@@ -29,6 +29,27 @@ export function fetchOrUpdateProfile(token) {
                     throw error
                 })
         }
+    }
+}
+
+export function updateUserName(data){
+    return async(dispatch, getState) => {
+        const status = selectProfile(getState()).status;
+        if (status === 'pending' || status ==='updating'){
+            return;
+        }
+        dispatch(actions.fetching())
+        const token = selectLogin(getState()).data.token
+        console.log(data)
+        await apiProvider.updateUserProfile(data, token)
+            .then ((response) => {
+                dispatch(actions.resolved(response.data))
+                return response.data
+            })
+            .catch ((error) => {
+                dispatch(actions.rejected(error))
+                throw error
+        })
     }
 }
 
