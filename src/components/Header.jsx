@@ -1,7 +1,10 @@
 import React from "react"
 import logo from 'assets/argentBankLogo.png'
+import { useSelector } from "react-redux"
+import { selectLogin } from "utils/selectors"
 
 export default function Header(){
+    const login = useSelector(selectLogin)
     return(
         <React.Fragment>
             <nav className="main-nav">
@@ -18,10 +21,12 @@ export default function Header(){
                         <i className="fa fa-user-circle"></i>
                         Sign In
                     </a>
-                    <a className="main-nav-item" href="./">
-                        <i className="fa fa-sign-out"></i>
-                        Sign Out
-                    </a>
+                    {login.isConnected === true &&
+                        <a className="main-nav-item" href="./">
+                            <i className="fa fa-sign-out"></i>
+                            Sign Out
+                        </a>
+                    }
                 </div>
             </nav>
         </React.Fragment>
