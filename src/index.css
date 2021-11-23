@@ -191,9 +191,9 @@ body {
 
 .input-wrapper {
   display: flex;
-  flex-direction: column;
   text-align: left;
   margin-bottom: 1rem;
+  flex-direction: column;
 }
 
 .input-wrapper label {
@@ -203,6 +203,22 @@ body {
 .input-wrapper input {
   padding: 5px;
   font-size: 1.2rem;
+}
+
+.editNameForm button{
+  width: 130px;
+  margin: 5px;
+  padding: 5px;
+}
+
+.editNameForm .input-wrapper {
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.editNameForm .input-wrapper input {
+  margin: 5px;
 }
 
 .footer {
