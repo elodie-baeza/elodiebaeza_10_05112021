@@ -1,3 +1,4 @@
+import AccountCard from "components/AccountCard";
 import EditName from "components/EditName";
 import { fetchOrUpdateProfile } from "features/profile";
 import React, { useEffect } from "react"
@@ -27,36 +28,9 @@ export default function Profile() {
                     <EditName />
                 </div>
                 <h2 className="sr-only">Accounts</h2>
-                <section className="account">
-                    <div className="account-content-wrapper">
-                    <h3 className="account-title">Argent Bank Checking (x8349)</h3>
-                    <p className="account-amount">$2,082.79</p>
-                    <p className="account-amount-description">Available Balance</p>
-                    </div>
-                    <div className="account-content-wrapper cta">
-                    <button className="transaction-button">View transactions</button>
-                    </div>
-                </section>
-                <section className="account">
-                    <div className="account-content-wrapper">
-                    <h3 className="account-title">Argent Bank Savings (x6712)</h3>
-                    <p className="account-amount">$10,928.42</p>
-                    <p className="account-amount-description">Available Balance</p>
-                    </div>
-                    <div className="account-content-wrapper cta">
-                    <button className="transaction-button">View transactions</button>
-                    </div>
-                </section>
-                <section className="account">
-                    <div className="account-content-wrapper">
-                    <h3 className="account-title">Argent Bank Credit Card (x8349)</h3>
-                    <p className="account-amount">$184.30</p>
-                    <p className="account-amount-description">Current Balance</p>
-                    </div>
-                    <div className="account-content-wrapper cta">
-                    <button className="transaction-button">View transactions</button>
-                    </div>
-                </section>
+                <AccountCard title='Argent Bank Checking (x8349)' amount='$2,082.79' amountDescription='Available Balance' />
+                <AccountCard title='Argent Bank Savings (x6712)' amount='$10,928.42' amountDescription='Available Balance' />
+                <AccountCard title='Argent Bank Credit Card (x8349)' amount='$184.30' amountDescription='Current Balance' />
             </main>
         </React.Fragment>
   );
