@@ -16,7 +16,8 @@ export default function Login(){
             navigate('/profile')
         })
         .catch(error => {
-          console.log(error) 
+            navigate('/error')
+            console.log(error) 
         })
   }
   
@@ -41,24 +42,32 @@ export default function Login(){
                 return errors;    
               }}
               render={({ handleSubmit, form, submitting, pristine, values }) => (
-                  <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit}>
                     <div className="input-wrapper">
-                        <label htmlFor="username">Username</label>
-                        <Field 
-                        name='email' 
-                        type="text" 
-                        id="username" 
-                        component='input' 
-                        />
+                        <Field name="email">
+                          {({ input, meta }) => (
+                            <div>
+                              <label htmlFor="username">Username</label>
+                              <input {...input} type="text" id='username' />
+                              {(meta.error || meta.submitError) && meta.touched && (
+                                <span>{meta.error || meta.submitError}</span>
+                              )}
+                            </div>
+                          )}
+                        </Field>
                     </div>
                     <div className="input-wrapper">
-                        <label htmlFor="password">Password</label>
-                        <Field 
-                        name='password' 
-                        type="password" 
-                        id="password" 
-                        component='input'
-                        />
+                        <Field name="password">
+                          {({ input, meta }) => (
+                            <div>
+                              <label htmlFor="username">Password</label>
+                              <input {...input} type="password" id='password' />
+                              {(meta.error || meta.submitError) && meta.touched && (
+                                <span>{meta.error || meta.submitError}</span>
+                              )}
+                            </div>
+                          )}
+                        </Field>
                     </div>
                     <div className="input-wrapper">
                         <label htmlFor="rememberMe">Remember-me</label>
@@ -72,8 +81,8 @@ export default function Login(){
                     className="sign-in-button" 
                     type='submit' 
                     disabled={submitting}>Sign In</button>
-                  </form>
-              )}
+                </form>
+            )}
             />
         </section>
       </main>

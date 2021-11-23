@@ -1,7 +1,7 @@
 import { Field, Form } from "react-final-form";
 import React, { useState } from "react"
 import { useSelector } from "react-redux";
-import { selectLogin, selectProfile } from "utils/selectors";
+import { selectProfile } from "utils/selectors";
 import { useDispatch } from "react-redux";
 import { updateUserName } from "features/profile";
 
@@ -9,7 +9,6 @@ export default function EditName(){
     const [display, setDisplay] = useState()
     const dispatch = useDispatch()
     const profileData = useSelector(selectProfile).data
-    const login = useSelector(selectLogin).data
 
     const formData = {}
 

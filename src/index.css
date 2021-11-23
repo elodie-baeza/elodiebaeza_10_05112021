@@ -24,6 +24,17 @@ body {
   background-color: #12002b;
 }
 
+.error {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.error p{
+  color: white;
+  font-size: xx-large;
+}
+
 .sr-only {
   border: 0 !important;
   clip: rect(1px, 1px, 1px, 1px) !important; /* 1 */
