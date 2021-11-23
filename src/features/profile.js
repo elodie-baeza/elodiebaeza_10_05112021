@@ -5,7 +5,7 @@ import { selectProfile } from "utils/selectors"
 const initialState = {
     status: 'void',
     data: {
-        firsName: '',
+        firstName: '',
         lastName: '',
     },
     error: null
